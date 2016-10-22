@@ -1,0 +1,12 @@
+<a href="<%= book_path(@conn, :index) %>" class="back-link"><< Zurück</a>
+<div>
+  <p><span class="book-property">Titel: </span> <%= @book.title %></p>
+  <p><span class="book-property">Autoren:</span> </span> <%= @book.author %></p>
+  <p><span class="book-property">Auflage:</span> </span> <%= @book.edition %>. Auflage</p>
+  <p><span class="book-property">Beschreibung:</span> </span> <%= @book.description %></p>
+  <p><span class="book-property">Preis:</span> </span> <%= @book.price %>€</p>
+  <p><span class="book-property">Kontakt:</span> <a href="#"></span> <%= @book.contact %></a></p>
+</div>
+
+<a href="<%= book_path(@conn, :edit, @book.id) %>">Bearbeiten</a>
+<%= link "Löschen", to: book_path(@conn, :delete, @book.id), method: :delete %>

@@ -1,0 +1,47 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, da ist etwas schief gelaufen! Guck mal nach den Fehlern</p>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label f, :title %>
+    <%= text_input f, :title %>
+    <%= error_tag f, :title %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :author %>
+    <%= text_input f, :author %>
+    <%= error_tag f, :author %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :edition %>
+    <%= number_input f, :edition %>
+    <%= error_tag f, :edition %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :price %>
+    <%= number_input f, :price %>
+    <%= error_tag f, :price %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :description %>
+    <%= textarea f, :description, rows: 5 %>
+    <%= error_tag f, :description %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :contact %>
+    <%= text_input f, :contact %>
+    <%= error_tag f, :contact %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Absenden", class: "button" %>
+  </div>
+<% end %>

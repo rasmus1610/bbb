@@ -1,0 +1,4 @@
+<a href="<%= book_path(@conn, :index) %>" class="back-link"><< Zurück</a>
+
+<%= render "form.html", changeset: @changeset,
+                        action: book_path(@conn, :create) %>

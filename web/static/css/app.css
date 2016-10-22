@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css?family=Space+Mono');
+
+
+/*Blue: #5AABE2*/
+
+*{
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.125rem;
+}
+
+a {
+  color: #5AABE2;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: line-through;
+}
+
+h1 {
+  color: #5AABE2;
+  font-size: 3rem;
+  font-weight: 400;
+}
+
+button > a, button > a:hover, .book-list-item:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+header {
+  padding: 25px 0;
+  height: 320px;
+}
+
+.button {
+  width: 50%;
+  margin: 0 auto;
+  display: block;
+  background-color: #5AABE2;
+  color: #f2f2f2;
+  font-size: 24px;
+  border: none;
+  padding: 15px;
+  font-family: 'Space Mono', monospace;
+  cursor: pointer;
+}
+
+.container {
+  max-width: 770px;
+  padding: 0 10px;
+  margin: 0 auto;
+}
+
+/*=========================================================================*/
+
+.logo-wrapper {
+  text-align: center;
+  margin: 0 auto;
+}
+
+/*=========================================================================*/
+
+#main {
+  padding: 50px 0;
+}
+
+.back-link {
+  color: #5AABE2;
+  text-decoration: none;
+  margin-bottom: 50px;
+  display: inline-block;
+}
+
+.book-list {
+  width: 100%;
+  padding-left: 0;
+  margin-top: 75px;
+}
+
+.book-list li {
+  list-style-type: none;
+}
+
+.book-list-item {
+  display: flex;
+  color: inherit;
+  text-decoration: none;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  transition: all .3s;
+}
+
+.book-list-item:hover {
+  color: #5AABE2
+}
+
+.book-title, .book-author, .book-price {
+  margin: 0;
+}
+
+.book-title {
+  font-size: 1.125rem;
+  margin-bottom: 5px;
+}
+
+.book-author {
+  font-size: .875rem;
+  color: #828282;
+}
+
+.book-price {
+  font-size: 1.5rem;
+}
+
+/*=========================================================================*/
+
+footer {
+  background-color: #5AABE2;
+  max-width: 750px;
+  color: #f2f2f2;
+  margin: 0 auto;
+  padding: 40px;
+  text-align: center;
+}
+
+/*=========================================================================*/
+
+.book-property {
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+/*=========================================================================*/
+
+.form-group {
+  width: 75%;
+  margin: 50px auto;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+.form-group input, textarea {
+  width: 100%;
+  display: block;
+  border-radius: 0;
+  border: none;
+  border-bottom: 3px solid #333;
+  font-size: 1.125rem;
+  font-family: 'Space Mono', monospace;
+  transition: border-color .3s;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+  border-color: #5AABE2;
+  outline: none;
+}
+
+button[type="submit"] {
+  width: 100%;
+}

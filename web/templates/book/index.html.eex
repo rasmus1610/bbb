@@ -1,0 +1,14 @@
+<button class="button"><a href="<%= book_path(@conn, :new) %>">+ Buch Hinzufügen</a></button>
+<ul class="book-list">
+  <%= for book <- @books do %>
+    <li>
+    <a href="<%= book_path(@conn, :show, book) %>" class="book-list-item">
+      <div>
+        <h3 class="book-title"><%= book.title %></h3>
+        <p class="book-author"><%= book.author %></p>
+      </div>
+      <p class="book-price"><%= book.price %>€</p>
+    </a>
+  </li>
+  <% end %>
+</ul>
