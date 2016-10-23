@@ -16,7 +16,7 @@ defmodule Bbb.Router do
   scope "/", Bbb do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "/", BookController, :index
     resources "/books", BookController
   end
 
