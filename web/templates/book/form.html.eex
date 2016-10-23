@@ -12,7 +12,7 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :author, "Autor" %>
+    <%= label f, :author, "Autor(-en)" %>
     <%= text_input f, :author %>
     <%= error_tag f, :author %>
   </div>
@@ -24,7 +24,7 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :price, "Preis" %>
+    <%= label f, :price, "Preis in €" %>
     <%= number_input f, :price %>
     <%= error_tag f, :price %>
   </div>
