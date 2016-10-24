@@ -14,6 +14,13 @@ defmodule Bbb.SessionController do
       |> sign_in(user_params["password"], conn)
   end
 
+  def delete(conn, _params) do
+    conn
+      |> delete_session(:current_user)
+      |> put_flash(:info, "Ausgeloggt!")
+      |> redirect(to: book_path(conn, :index))
+  end
+
   defp sign_in(user, password, conn) when is_nil(user) do
     conn
        |> put_flash(:error, "Invalid username/password")

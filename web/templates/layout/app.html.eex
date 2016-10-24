@@ -18,22 +18,35 @@
   </head>
   <body>
     <header>
+      <% info = get_flash(@conn, :info)
+        error = get_flash(@conn, :error)
+      %>
+      <%= if info do %>
+        <div class="flash-info">Info: <%= info %></div>
+      <% end %>
+      <%= if error do %>
+        <div class="flash-error">Error: <%= error %></div>
+      <% end %>
       <div class="logo-wrapper">
         <img src="<%= static_path(@conn, "/images/Logo.svg") %>" alt="b3">
         <h1><span>B3</h1>
       </div>
     </header>
+    <section id="navigation">
+      <ul>
+        <li>
+          <%= if user = current_user(@conn) do %>
+            Hey,
+            <strong><%= user.email %></strong>
+            <%= link "Log out", to: session_path(@conn, :delete, user.id), method: :delete %>
+          <% else %>
+            <%= link "Log in", to: session_path(@conn, :new) %> or <%= link "Sign up", to: user_path(@conn, :new) %>
+          <% end %>
+        </li>
+      </ul>
+    </section>
     <section id="main">
       <div class="container">
-        <% info = get_flash(@conn, :info)
-          error = get_flash(@conn, :error)
-        %>
-        <%= if info do %>
-          <div>Info: <%= info %></div>
-        <% end %>
-        <%= if error do %>
-          <div>Error: <%= error %></div>
-        <% end %>
         <%= render @view_module, @view_template, assigns %>
       </div>
     </section>

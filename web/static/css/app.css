@@ -121,9 +121,7 @@ header {
 
 footer {
   background-color: #5AABE2;
-  max-width: 750px;
   color: #f2f2f2;
-  margin: 0 auto;
   padding: 40px;
   text-align: center;
 }
@@ -166,4 +164,40 @@ footer {
 
 button[type="submit"] {
   width: 75%;
+}
+
+
+/*=========================================================================*/
+
+.flash-info, .flash-error {
+  margin: 15px;
+  display: inline-block;
+  padding: 15px;
+  color: #f2f2f2;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.flash-info {
+  background-color: #5AABE2;
+}
+
+.flash-error {
+  background-color: #e74c3c;
+}
+
+/*=========================================================================*/
+#navigation > ul > li {
+  display: inline-block;
+}
+
+#navigation {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+#navigation > ul {
+  list-style-type: none;
+  padding: 0;
 }
