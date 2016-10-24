@@ -3,6 +3,8 @@ defmodule Bbb.UserController do
 
   alias Bbb.User
 
+  plug :authorize_user
+
   def index(conn, _params) do
     users = Repo.all(User)
     render(conn, "index.html", users: users)
@@ -61,5 +63,16 @@ defmodule Bbb.UserController do
     conn
     |> put_flash(:info, "User deleted successfully.")
     |> redirect(to: user_path(conn, :index))
+  end
+
+  defp authorize_user(conn, _opts) do
+    if user = current_user(conn) do
+      conn
+    else
+      conn
+      |> put_flash(:error, "Nicht authorisiert!")
+      |> redirect(to: page_path(conn, :index))
+      |> halt()
+    end
   end
 end
