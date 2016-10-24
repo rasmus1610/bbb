@@ -9,9 +9,11 @@ defmodule Bbb.Book do
     field :description, :string
     field :contact, :string
     field :topic, :string
+    belongs_to :user, Bbb.User
 
     timestamps()
   end
+
 
   @doc """
   Builds a changeset based on the `struct` and `params`.

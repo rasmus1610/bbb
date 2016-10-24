@@ -7,6 +7,7 @@ defmodule Bbb.User do
     field :email, :string
     field :password_digest, :string
 
+    has_many :books, Bbb.Book
     timestamps()
 
     field :password, :string, virtual: true
