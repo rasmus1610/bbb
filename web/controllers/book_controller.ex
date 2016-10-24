@@ -17,8 +17,6 @@ defmodule Bbb.BookController do
   end
 
   def create(conn, %{"book" => book_params}) do
-
-
     changeset = Repo.get(User, current_user(conn).id)
     |> build_assoc(:books)
     |> Book.changeset(book_params)
@@ -26,7 +24,7 @@ defmodule Bbb.BookController do
     case Repo.insert(changeset) do
       {:ok, _book} ->
         conn
-        |> put_flash(:info, "Book created successfully.")
+        |> put_flash(:info, "Buch erfolgreich hinzugefügt.")
         |> redirect(to: book_path(conn, :index))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -45,7 +43,7 @@ defmodule Bbb.BookController do
       render(conn, "edit.html", book: book, changeset: changeset)
     else
       conn
-      |> put_flash(:error, "Das ist nicht dein Buch")
+      |> put_flash(:error, "Das ist nicht dein Buch!")
       |> redirect(to: book_path(conn, :show, book))
     end
   end
@@ -71,21 +69,21 @@ defmodule Bbb.BookController do
     # it to always work (and if it does not, it will raise).
     if current_user(conn).id == book.user_id do
       Repo.delete!(book)
+      conn
+      |> put_flash(:info, "Book deleted successfully.")
+      |> redirect(to: book_path(conn, :index))
     else
       conn
       |> put_flash(:error, "Das ist nicht dein Buch")
       |> redirect(to: book_path(conn, :show, book))
     end
 
-    conn
-    |> put_flash(:info, "Book deleted successfully.")
-    |> redirect(to: book_path(conn, :index))
+
   end
 
   defp authorize_user(conn, _opts) do
-    user = Plug.Conn.get_session(conn, :current_user)
 
-    if user = Plug.Conn.get_session(conn, :current_user) do
+    if user = current_user(conn) do
       conn
     else
       conn

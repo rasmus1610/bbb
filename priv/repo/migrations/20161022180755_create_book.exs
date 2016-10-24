@@ -8,7 +8,6 @@ defmodule Bbb.Repo.Migrations.CreateBook do
       add :edition, :integer
       add :price, :integer
       add :description, :string
-      add :topic, :string
 
       timestamps()
     end

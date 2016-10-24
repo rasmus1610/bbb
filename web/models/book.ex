@@ -7,7 +7,6 @@ defmodule Bbb.Book do
     field :edition, :integer
     field :price, :integer
     field :description, :string
-    field :topic, :string
     belongs_to :user, Bbb.User
 
     timestamps()
