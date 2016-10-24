@@ -82,7 +82,7 @@ defmodule Bbb.BookController do
   end
 
   defp authorize_user(conn, _opts) do
-    if user = current_user(conn) do
+    if current_user(conn) do
       conn
     else
       conn
