@@ -22,7 +22,7 @@ defmodule Bbb.SessionController do
     conn
       |> delete_session(:current_user)
       |> put_flash(:info, "Ausgeloggt!")
-      |> redirect(to: book_path(conn, :index))
+      |> redirect(to: page_path(conn, :index))
   end
 
   defp sign_in(user, _password, conn) when is_nil(user) do

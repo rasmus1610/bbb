@@ -18,7 +18,8 @@
   </head>
   <body>
     <header>
-      <% info = get_flash(@conn, :info)
+      <%
+        info = get_flash(@conn, :info)
         error = get_flash(@conn, :error)
       %>
       <%= if info do %>

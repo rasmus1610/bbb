@@ -4,6 +4,8 @@ defmodule Bbb.BookController do
   alias Bbb.Book
   alias Bbb.User
 
+  plug :authorize_user when action in [:new, :create, :update, :edit, :delete, :show, :index]
+
   def index(conn, _params) do
     books = Repo.all(Book)
     render(conn, "index.html", books: books)
@@ -15,9 +17,9 @@ defmodule Bbb.BookController do
   end
 
   def create(conn, %{"book" => book_params}) do
-    current_user = Plug.Conn.get_session(conn, :current_user)
 
-    changeset = Repo.get(User, current_user.id)
+
+    changeset = Repo.get(User, current_user(conn).id)
     |> build_assoc(:books)
     |> Book.changeset(book_params)
 
@@ -39,7 +41,13 @@ defmodule Bbb.BookController do
   def edit(conn, %{"id" => id}) do
     book = Repo.get!(Book, id)
     changeset = Book.changeset(book)
-    render(conn, "edit.html", book: book, changeset: changeset)
+    if current_user(conn).id == book.user_id do
+      render(conn, "edit.html", book: book, changeset: changeset)
+    else
+      conn
+      |> put_flash(:error, "Das ist nicht dein Buch")
+      |> redirect(to: book_path(conn, :show, book))
+    end
   end
 
   def update(conn, %{"id" => id, "book" => book_params}) do
@@ -61,11 +69,34 @@ defmodule Bbb.BookController do
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
-    Repo.delete!(book)
+    if current_user(conn).id == book.user_id do
+      Repo.delete!(book)
+    else
+      conn
+      |> put_flash(:error, "Das ist nicht dein Buch")
+      |> redirect(to: book_path(conn, :show, book))
+    end
 
     conn
     |> put_flash(:info, "Book deleted successfully.")
     |> redirect(to: book_path(conn, :index))
+  end
+
+  defp authorize_user(conn, _opts) do
+    user = Plug.Conn.get_session(conn, :current_user)
+
+    if user = Plug.Conn.get_session(conn, :current_user) do
+      conn
+    else
+      conn
+      |> put_flash(:error, "Nicht authorisiert!")
+      |> redirect(to: page_path(conn, :index))
+      |> halt()
+    end
+  end
+
+  defp current_user(conn) do
+    Plug.Conn.get_session(conn, :current_user)
   end
 
 end
