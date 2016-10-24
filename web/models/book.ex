@@ -7,7 +7,6 @@ defmodule Bbb.Book do
     field :edition, :integer
     field :price, :integer
     field :description, :string
-    field :contact, :string
     field :topic, :string
     belongs_to :user, Bbb.User
 
@@ -20,7 +19,7 @@ defmodule Bbb.Book do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:title, :author, :edition, :price, :description, :contact])
-    |> validate_required([:title, :author, :edition, :price, :description, :contact])
+    |> cast(params, [:title, :author, :edition, :price, :description])
+    |> validate_required([:title, :author, :edition, :price, :description])
   end
 end

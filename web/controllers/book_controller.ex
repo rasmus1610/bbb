@@ -2,8 +2,7 @@ defmodule Bbb.BookController do
   use Bbb.Web, :controller
 
   alias Bbb.Book
-
-  plug :assign_user
+  alias Bbb.User
 
   def index(conn, _params) do
     books = Repo.all(Book)
@@ -16,7 +15,11 @@ defmodule Bbb.BookController do
   end
 
   def create(conn, %{"book" => book_params}) do
-    changeset = Book.changeset(%Book{}, book_params)
+    current_user = Plug.Conn.get_session(conn, :current_user)
+
+    changeset = Repo.get(User, current_user.id)
+    |> build_assoc(:books)
+    |> Book.changeset(book_params)
 
     case Repo.insert(changeset) do
       {:ok, _book} ->
@@ -29,7 +32,7 @@ defmodule Bbb.BookController do
   end
 
   def show(conn, %{"id" => id}) do
-    book = Repo.get!(Book, id)
+    book = Repo.get!(Book, id) |> Repo.preload(:user)
     render(conn, "show.html", book: book)
   end
 
@@ -65,13 +68,4 @@ defmodule Bbb.BookController do
     |> redirect(to: book_path(conn, :index))
   end
 
-  defp assign_user(conn, _opts) do
-    case conn.params do
-      %{"user_id" => user_id} ->
-        user = Repo.get(Bbb.User, user_id)
-        assign(conn, :user, user)
-      _ ->
-        conn
-    end
-  end
 end

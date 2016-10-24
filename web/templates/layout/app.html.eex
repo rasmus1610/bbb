@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>BonnerBücherBörse</title>
+    <title>B3</title>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -38,9 +38,9 @@
           <%= if user = current_user(@conn) do %>
             Hey,
             <strong><%= user.email %></strong>
-            <%= link "Log out", to: session_path(@conn, :delete, user.id), method: :delete %>
+            <%= link "Ausloggen", to: session_path(@conn, :delete, user.id), method: :delete %>
           <% else %>
-            <%= link "Log in", to: session_path(@conn, :new) %> or <%= link "Sign up", to: user_path(@conn, :new) %>
+            <%= link "Einloggen", to: session_path(@conn, :new) %> oder <%= link "Account erstellen", to: user_path(@conn, :new) %>
           <% end %>
         </li>
       </ul>

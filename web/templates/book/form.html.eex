@@ -36,12 +36,6 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :contact, "Kontakt" %>
-    <%= text_input f, :contact %>
-    <%= error_tag f, :contact %>
-  </div>
-
-  <div class="form-group">
     <%= submit "Absenden", class: "button" %>
   </div>
 <% end %>

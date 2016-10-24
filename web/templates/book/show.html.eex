@@ -5,7 +5,7 @@
   <p><span class="book-property">Auflage:</span> </span> <%= @book.edition %>. Auflage</p>
   <p><span class="book-property">Beschreibung:</span> </span> <%= @book.description %></p>
   <p><span class="book-property">Preis:</span> </span> <%= @book.price %>€</p>
-  <p><span class="book-property">Kontakt:</span> <a href="#"></span> <%= @book.contact %></a></p>
+  <p><span class="book-property">Kontakt:</span> <a href="#"></span> <%= @book.user.email %></a></p>
 </div>
 
 <a href="<%= book_path(@conn, :edit, @book) %>">Bearbeiten</a>
