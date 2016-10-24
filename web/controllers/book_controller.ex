@@ -3,6 +3,8 @@ defmodule Bbb.BookController do
 
   alias Bbb.Book
 
+  plug :assign_user
+
   def index(conn, _params) do
     books = Repo.all(Book)
     render(conn, "index.html", books: books)
@@ -61,5 +63,15 @@ defmodule Bbb.BookController do
     conn
     |> put_flash(:info, "Book deleted successfully.")
     |> redirect(to: book_path(conn, :index))
+  end
+
+  defp assign_user(conn, _opts) do
+    case conn.params do
+      %{"user_id" => user_id} ->
+        user = Repo.get(Bbb.User, user_id)
+        assign(conn, :user, user)
+      _ ->
+        conn
+    end
   end
 end

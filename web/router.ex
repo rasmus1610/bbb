@@ -17,8 +17,9 @@ defmodule Bbb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", BookController, :index
-    resources "/books", BookController
     resources "/users", UserController
+    resources "/books", BookController
+
     resources "/sessions", SessionController, only: [:new, :create, :delete]
   end
 
