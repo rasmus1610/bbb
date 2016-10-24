@@ -25,6 +25,15 @@
     </header>
     <section id="main">
       <div class="container">
+        <% info = get_flash(@conn, :info)
+          error = get_flash(@conn, :error)
+        %>
+        <%= if info do %>
+          <div>Info: <%= info %></div>
+        <% end %>
+        <%= if error do %>
+          <div>Error: <%= error %></div>
+        <% end %>
         <%= render @view_module, @view_template, assigns %>
       </div>
     </section>
