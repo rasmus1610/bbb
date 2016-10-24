@@ -4,10 +4,10 @@ defmodule Bbb.BookController do
   alias Bbb.Book
   alias Bbb.User
 
-  plug :authorize_user when action in [:new, :create, :update, :edit, :delete, :show, :index]
+  plug :authorize_user
 
   def index(conn, _params) do
-    books = Repo.all(Book)
+    books = Enum.reverse Repo.all(Book)
     render(conn, "index.html", books: books)
   end
 
@@ -55,7 +55,7 @@ defmodule Bbb.BookController do
     case Repo.update(changeset) do
       {:ok, book} ->
         conn
-        |> put_flash(:info, "Book updated successfully.")
+        |> put_flash(:info, "Buch erfolgreich bearbeitet!")
         |> redirect(to: book_path(conn, :show, book))
       {:error, changeset} ->
         render(conn, "edit.html", book: book, changeset: changeset)
@@ -82,7 +82,6 @@ defmodule Bbb.BookController do
   end
 
   defp authorize_user(conn, _opts) do
-
     if user = current_user(conn) do
       conn
     else
