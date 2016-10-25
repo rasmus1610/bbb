@@ -3,6 +3,8 @@ defmodule Bbb.UserController do
 
   alias Bbb.User
 
+  import Bbb.ControllerHelpers
+
   plug :authorize_user when not action in [:new, :create]
 
   def index(conn, _params) do
@@ -63,20 +65,5 @@ defmodule Bbb.UserController do
     conn
     |> put_flash(:info, "User deleted successfully.")
     |> redirect(to: user_path(conn, :index))
-  end
-
-  defp authorize_user(conn, _opts) do
-    if current_user(conn) do
-      conn
-    else
-      conn
-      |> put_flash(:error, "Nicht authorisiert!")
-      |> redirect(to: page_path(conn, :index))
-      |> halt()
-    end
-  end
-
-  defp current_user(conn) do
-    Plug.Conn.get_session(conn, :current_user)
   end
 end
