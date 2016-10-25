@@ -19,8 +19,10 @@ defmodule Bbb.Router do
     get "/", PageController, :index
     resources "/users", UserController, only: [:new, :create, :delete]
     resources "/books", BookController
-
     resources "/sessions", SessionController, only: [:new, :create, :delete]
+
+    get "/login", SessionController, :new
+    get "/signup", UserController, :new
   end
 
   # Other scopes may use custom stacks.

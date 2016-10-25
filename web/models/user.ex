@@ -21,6 +21,7 @@ defmodule Bbb.User do
     struct
     |> cast(params, [:email, :password, :password_confirmation])
     |> validate_required([:email, :password, :password_confirmation])
+    |> unique_constraint(:email)
     |> hash_password
   end
 

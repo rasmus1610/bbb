@@ -41,7 +41,7 @@
             <strong><%= user.email %></strong>
             <%= link "Ausloggen", to: session_path(@conn, :delete, user.id), method: :delete %>
           <% else %>
-            <%= link "Einloggen", to: session_path(@conn, :new) %> oder <%= link "Account erstellen", to: user_path(@conn, :new) %>
+            <%= link "Einloggen", to: "/login" %> oder <%= link "Account erstellen", to: "/signup" %>
           <% end %>
         </li>
       </ul>

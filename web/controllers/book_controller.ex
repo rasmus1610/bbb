@@ -4,6 +4,8 @@ defmodule Bbb.BookController do
   alias Bbb.Book
   alias Bbb.User
 
+  import Bbb.ControllerHelpers
+
   plug :authorize_user
 
   def index(conn, _params) do
@@ -39,13 +41,8 @@ defmodule Bbb.BookController do
   def edit(conn, %{"id" => id}) do
     book = Repo.get!(Book, id)
     changeset = Book.changeset(book)
-    if current_user(conn).id == book.user_id do
-      render(conn, "edit.html", book: book, changeset: changeset)
-    else
-      conn
-      |> put_flash(:error, "Das ist nicht dein Buch!")
-      |> redirect(to: book_path(conn, :show, book))
-    end
+    assure_is_book_owner(conn, book)
+    render(conn, "edit.html", book: book, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "book" => book_params}) do
@@ -65,35 +62,23 @@ defmodule Bbb.BookController do
   def delete(conn, %{"id" => id}) do
     book = Repo.get!(Book, id)
 
+    assure_is_book_owner(conn, book)
+
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
-    if current_user(conn).id == book.user_id do
-      Repo.delete!(book)
+    Repo.delete!(book)
+    conn
+    |> put_flash(:info, "Book deleted successfully.")
+    |> redirect(to: book_path(conn, :index))
+  end
+
+  defp assure_is_book_owner(conn, book) do
+    if current_user(conn) == book.user_id do
       conn
-      |> put_flash(:info, "Book deleted successfully.")
-      |> redirect(to: book_path(conn, :index))
     else
       conn
       |> put_flash(:error, "Das ist nicht dein Buch")
-      |> redirect(to: book_path(conn, :show, book))
-    end
-
-
-  end
-
-  defp authorize_user(conn, _opts) do
-    if current_user(conn) do
-      conn
-    else
-      conn
-      |> put_flash(:error, "Nicht authorisiert!")
-      |> redirect(to: page_path(conn, :index))
-      |> halt()
+      |> redirect(to: book_path(conn, :index))
     end
   end
-
-  defp current_user(conn) do
-    Plug.Conn.get_session(conn, :current_user)
-  end
-
 end

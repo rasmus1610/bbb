@@ -9,7 +9,7 @@
 </div>
 
 <% user = current_user(@conn) %>
-<%= if user.id == @book.id do %>
+<%= if user.id == @book.user.id do %>
   <a href="<%= book_path(@conn, :edit, @book) %>">Bearbeiten</a>
   <%= link "Löschen", to: book_path(@conn, :delete, @book), method: :delete %>
 <% end %>

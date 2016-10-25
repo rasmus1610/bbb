@@ -3,7 +3,7 @@ defmodule Bbb.UserController do
 
   alias Bbb.User
 
-  plug :authorize_user
+  plug :authorize_user when not action in [:new, :create]
 
   def index(conn, _params) do
     users = Repo.all(User)
