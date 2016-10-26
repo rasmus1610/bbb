@@ -1,4 +1,6 @@
-<button class="button"><a href="<%= book_path(@conn, :new) %>">+ Buch Hinzufügen</a></button>
+<div class="new-book-wrapper">
+  <a href="<%= book_path(@conn, :new) %>" class="button">+ Buch Hinzufügen</a>
+</div>
 <ul class="book-list">
   <%= for book <- @books do %>
     <li>

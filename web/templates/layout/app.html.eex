@@ -33,19 +33,21 @@
         <h1 class="site-title">Bonn. Bücher. Basar.</h1>
       </div>
     </header>
-    <section id="navigation">
-      <ul>
-        <li>
-          <%= if user = current_user(@conn) do %>
-            Hey,
-            <strong><%= user.email %></strong>
-            <%= link "Ausloggen", to: session_path(@conn, :delete, user.id), method: :delete %>
-          <% else %>
-            <%= link "Einloggen", to: "/login" %> oder <%= link "Account erstellen", to: "/signup" %>
-          <% end %>
-        </li>
-      </ul>
-    </section>
+    <div class="container">
+      <section id="navigation">
+        <ul>
+          <li>
+            <%= if user = current_user(@conn) do %>
+              Hey,
+              <strong><%= user.email %></strong>
+              <%= link "Ausloggen", to: session_path(@conn, :delete, user.id), method: :delete %>
+            <% else %>
+              <%= link "Einloggen", to: "/login" %> oder <%= link "Account erstellen", to: "/signup" %>
+            <% end %>
+          </li>
+        </ul>
+      </section>
+    </div>
     <section id="main">
       <div class="container">
         <%= render @view_module, @view_template, assigns %>

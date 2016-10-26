@@ -10,6 +10,6 @@
 
 <% user = current_user(@conn) %>
 <%= if user.id == @book.user.id do %>
-  <a href="<%= book_path(@conn, :edit, @book) %>">Bearbeiten</a>
-  <%= link "Löschen", to: book_path(@conn, :delete, @book), method: :delete %>
+  <a href="<%= book_path(@conn, :edit, @book) %>" class="button button-edit">Bearbeiten</a>
+  <%= link "Löschen", to: book_path(@conn, :delete, @book), method: :delete, class: "button button-delete" %>
 <% end %>

@@ -1,4 +1,4 @@
-<h2>Herzlich Willkommen</h2>
+<h2 class="site-title">Herzlich Willkommen</h2>
 <p>
   <a href="<%= book_path(@conn, :index) %>">Hier geht es zu den Büchern!</a>
 </p>
