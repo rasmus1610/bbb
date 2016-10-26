@@ -9,7 +9,7 @@ defmodule Bbb.ControllerHelpers do
     else
       conn
       |> put_flash(:error, "Nicht authorisiert!")
-      |> redirect(to: page_path(conn, :index))
+      |> redirect(to: session_path(conn, :new))
       |> halt()
     end
   end

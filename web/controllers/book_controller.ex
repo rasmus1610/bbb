@@ -6,7 +6,7 @@ defmodule Bbb.BookController do
 
   import Bbb.ControllerHelpers
 
-  plug :authorize_user
+  plug :authorize_user when not action in [:index]
 
   def index(conn, _params) do
     books = Enum.reverse Repo.all(Book)
@@ -39,7 +39,7 @@ defmodule Bbb.BookController do
   end
 
   def edit(conn, %{"id" => id}) do
-    book = Repo.get!(Book, id)
+    book = Repo.get!(Book, id) |> Repo.preload(:user)
     changeset = Book.changeset(book)
     assure_is_book_owner(conn, book)
     render(conn, "edit.html", book: book, changeset: changeset)
@@ -73,7 +73,7 @@ defmodule Bbb.BookController do
   end
 
   defp assure_is_book_owner(conn, book) do
-    if current_user(conn) == book.user_id do
+    if current_user(conn).id == book.user.id do
       conn
     else
       conn

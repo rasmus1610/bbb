@@ -1,4 +1,4 @@
 <h2>Herzlich Willkommen</h2>
 <p>
-  Log dich ein oder erstelle einen neuen Account, um alle Bücher, die angeboten werden, zu sehen und selbst ein Angebot einzureichen.
+  <a href="<%= book_path(@conn, :index) %>">Hier geht es zu den Büchern!</a>
 </p>
